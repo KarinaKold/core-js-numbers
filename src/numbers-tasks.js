@@ -257,18 +257,15 @@ function getCube(num) {
  *   10 => 55
  */
 function getFibonacciNumber(index) {
-  // if (index <= 1) return index;
-  // let a = 0;
-  // let b = 1;
-  // let c = 1;
-  // let res = 1;
-  // while (c < index) {
-  //   c = a + b;
-  //   res += 1;
-  //   a = b;
-  //   b = c;
-  // }
-  // return res;
+  let a = 0;
+  let b = 1;
+  let c = index;
+  for (let i = 2; i <= index; i += 1) {
+    c = a + b;
+    a = b;
+    b = c;
+  }
+  return c;
 }
 
 /**
@@ -306,7 +303,7 @@ function getSumOfDigits(num) {
     .toString()
     .split('')
     .map(Number)
-    .reduce(function (a, b) {
+    .reduce((a, b) => {
       return a + b;
     }, 0);
   return sum;
@@ -431,8 +428,8 @@ function getNumberValue(number) {
  * 5        => true
  * '5'      => false
  */
-function isNumber(/* number */) {
-  throw new Error('Not implemented');
+function isNumber(number) {
+  return Number.isFinite(number);
 }
 
 /**
@@ -460,8 +457,8 @@ function isInteger(number) {
  * '4.567abcdefgh' => 4.567
  * 'abcdefgh'      => NaN
  */
-function getFloatOnString(/* str */) {
-  throw new Error('Not implemented');
+function getFloatOnString(str) {
+  return Number.parseFloat(str);
 }
 
 /**
@@ -632,8 +629,10 @@ function getHypotenuse(a, b) {
  * 15 => 8
  */
 function getCountOfOddNumbers(number) {
-  let odd = 0;
-
+  if (number > 0) {
+    return Math.abs(Math.ceil(number / 2));
+  }
+  return Math.abs(Math.floor(number / 2));
 }
 
 module.exports = {
